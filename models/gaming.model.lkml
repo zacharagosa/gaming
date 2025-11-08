@@ -2,10 +2,10 @@ connection: "looker-private-demo"
 
 include: "/views/*.view.lkml"
 include: "/derived_tables/*.view.lkml"
-#include: "*.dashboard.lookml"   # include a LookML dashboard called my_dashboard
+include: "/lookml_dashboards/*.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
 # Model Configuration
-datagroup: events_raw { sql_trigger:  SELECT current_date FROM `se-pbl.gaming_demo_dev.raw_events`  ;;
+datagroup: events_raw { sql_trigger:  SELECT max(event) FROM `looker-private-demo.gaming.raw_events`  ;;
   max_cache_age: "24 hours"
 }
 named_value_format: large_usd { value_format: "[>=1000000]\"$\"0.00,,\"M\";[>=1000]\"$\"0.00,\"K\";\"$\"0.00" }

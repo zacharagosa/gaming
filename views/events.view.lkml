@@ -29,7 +29,7 @@ view: events {
           unique_session_id,
           event_sequence_within_session,
           inverse_event_sequence_within_session
-          from `gaming_demo_dev.events_sessionized` ;;
+          from `looker-private-demo.gaming.events_sessionized` ;;
     datagroup_trigger: events_raw
     partition_keys: ["event"]
     cluster_keys: ["game_name"]
