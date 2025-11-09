@@ -284,7 +284,7 @@ view: user_facts {
     description: "Total Revenue from Ads + In-App Purchases"
     type: sum
     sql: ${lifetime_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: total_iap_revenue {
@@ -293,7 +293,7 @@ view: user_facts {
     description: "Total Revenue from In-App Purchases"
     type: sum
     sql: ${lifetime_iap_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: total_ad_revenue {
@@ -302,7 +302,7 @@ view: user_facts {
     description: "Total Revenue from Ad"
     type: sum
     sql: ${lifetime_ad_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
 # D1

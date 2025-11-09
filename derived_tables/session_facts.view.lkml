@@ -259,7 +259,7 @@ view: session_facts {
     description: "Total Revenue from Ads + In-App Purchases"
     type: sum
     sql: ${session_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: total_iap_revenue {
@@ -268,7 +268,7 @@ view: session_facts {
     description: "Total Revenue from In-App Purchases"
     type: sum
     sql: ${session_iap_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: total_ad_revenue {
@@ -277,7 +277,7 @@ view: session_facts {
     description: "Total Revenue from Ad"
     type: sum
     sql: ${session_ad_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: average_revenue_per_user {
@@ -286,7 +286,7 @@ view: session_facts {
     description: "(Average revenue per user) = Total Revenue (IAP + Ad) / Total Number of Users"
     type: number
     sql: 1.0 * ${total_revenue} / NULLIF(count(distinct ${user_id}),0) ;;
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
 

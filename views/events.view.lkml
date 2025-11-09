@@ -296,7 +296,7 @@ view: events {
     group_label: "User Counts"
     type: count_distinct
     sql: ${user_id};;
-    value_format_name: large_number
+    value_format_name: decimal_0
     drill_fields: [drill_field,number_of_users]
   }
 
@@ -309,7 +309,7 @@ view: events {
       field: retention_day
       value: "0"
     }
-    value_format_name: large_number
+    value_format_name: decimal_0
     drill_fields: [drill_field,number_of_new_users]
   }
 
@@ -322,7 +322,7 @@ view: events {
       field: install_group
       value: "paid"
     }
-    value_format_name: large_number
+    value_format_name: decimal_0
     drill_fields: [drill_field,number_of_paid_users]
   }
 
@@ -334,14 +334,14 @@ view: events {
     group_label: "Event Counts"
     label: "Number of Events"
     type: count
-    value_format_name: large_number
+    value_format_name: decimal_0
     drill_fields: [drill_field,count]
   }
 
   measure: number_of_ads_shown {
     group_label: "Event Counts"
     type: count
-    value_format_name: large_number
+    value_format_name: decimal_0
     filters: {
       field: event_name
       value: "Ad_Watched"
@@ -352,7 +352,7 @@ view: events {
   measure: number_of_level_ups {
     group_label: "Event Counts"
     type: count
-    value_format_name: large_number
+    value_format_name: decimal_0
     filters: {
       field: event_name
       value: "Level_Up"
@@ -371,7 +371,7 @@ view: events {
 
   measure: number_of_sesssions {
     type: count_distinct
-    value_format_name: large_number
+    value_format_name: decimal_0
     sql: ${unique_session_id} ;;
     drill_fields: [drill_field,number_of_sesssions]
   }
@@ -583,7 +583,7 @@ view: events {
     group_label: "User Acquistion"
     type: number
     sql: ${total_install_spend}/ NULLIF(${number_of_new_users},0) ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,cost_per_install]
   }
 
@@ -593,7 +593,7 @@ view: events {
     description: "Total spent to acquire users"
     type: sum
     sql: ${install_cost} ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,total_install_spend]
   }
 
@@ -665,7 +665,7 @@ view: events {
     description: "Total Revenue from In-App Purchases"
     type: sum
     sql: ${iap_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,total_iap_revenue]
   }
 
@@ -674,14 +674,14 @@ view: events {
     description: "Total Revenue from Ads"
     type: sum
     sql: ${ad_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,total_ad_revenue]
   }
 
   dimension: combined_revenue {
     type: number
     sql: IFNULL(${iap_revenue},0) + IFNULL(${ad_revenue},0) ;;
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: total_revenue {
@@ -689,7 +689,7 @@ view: events {
     description: "IAP + Ad Revenue"
     type: sum
     sql: ${combined_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,total_revenue]
   }
 
@@ -699,7 +699,7 @@ view: events {
     description: "Revenue - Marketing Spend"
     type: number
     sql: ${total_revenue} - ${total_install_spend}  ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,total_revenue_after_UA]
   }
 
@@ -712,7 +712,7 @@ view: events {
       field: install_group
       value: "paid"
     }
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,total_revenue]
   }
 
@@ -721,7 +721,7 @@ view: events {
     description: "IAP + Ad Revenue"
     type: average
     sql: ${combined_revenue} ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,average_revenue]
   }
 
@@ -752,7 +752,7 @@ view: events {
     description: " Total Revenue / Number of IAP Paying Users"
     type: number
     sql: 1.0 * ${total_iap_revenue} / NULLIF(${number_of_spenders},0) ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,average_revenue_per_spender]
   }
 
@@ -762,7 +762,7 @@ view: events {
     description: "(Average revenue per user) = Total Revenue (IAP + Ad) / Total Number of Users"
     type: number
     sql: 1.0 * ${total_revenue} / NULLIF(${number_of_users},0) ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,average_revenue_per_user]
   }
 
@@ -772,7 +772,7 @@ view: events {
     description: "(Average revenue per user) = Ad Revenue / Total Number of Users"
     type: number
     sql: 1.0 * ${total_ad_revenue} / NULLIF(${number_of_users},0) ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,average_revenue_per_user]
   }
 
@@ -782,7 +782,7 @@ view: events {
     description: "(Average revenue per user) = IAP Revenue / Total Number of Users"
     type: number
     sql: 1.0 * ${total_iap_revenue} / NULLIF(${number_of_users},0) ;;
-    value_format_name: large_usd
+    value_format_name: usd
     drill_fields: [drill_field,average_revenue_per_user]
   }
 
@@ -800,13 +800,13 @@ view: events {
       value: ">0"
     }
     drill_fields: [drill_field,total_d1_revenue]
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: d1_revenue_per_retained_user {
     group_label: "Monetization"
     description: "Revenue per user (that are retained for 1 days)"
-    value_format_name: large_usd
+    value_format_name: usd
     type: number
     sql: 1.0 * ${total_d1_revenue}/ NULLIF(${d1_retained_users},0);;
     drill_fields: [drill_field,d1_revenue_per_retained_user]
@@ -826,13 +826,13 @@ view: events {
       value: ">7"
     }
     drill_fields: [drill_field,total_d7_revenue]
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: d7_revenue_per_retained_user {
     group_label: "Monetization"
     description: "Revenue per user (that are retained for 7 days)"
-    value_format_name: large_usd
+    value_format_name: usd
     type: number
     sql: 1.0 * ${total_d7_revenue}/ NULLIF(${d7_retained_users},0);;
     drill_fields: [drill_field,d7_revenue_per_retained_user]
@@ -852,13 +852,13 @@ view: events {
       value: ">14"
     }
     drill_fields: [drill_field,total_d14_revenue]
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: d14_revenue_per_retained_user {
     group_label: "Monetization"
     description: "Revenue per user (that are retained for 14 days)"
-    value_format_name: large_usd
+    value_format_name: usd
     type: number
     sql: 1.0 * ${total_d14_revenue}/ NULLIF(${d14_retained_users},0);;
     drill_fields: [drill_field,d14_revenue_per_retained_user]
@@ -878,13 +878,13 @@ view: events {
       value: ">30"
     }
     drill_fields: [drill_field,total_d30_revenue]
-    value_format_name: large_usd
+    value_format_name: usd
   }
 
   measure: d30_revenue_per_retained_user {
     group_label: "Monetization"
     description: "Revenue per user (that are retained for 30 days)"
-    value_format_name: large_usd
+    value_format_name: usd
     type: number
     sql: 1.0 * ${total_d30_revenue}/ NULLIF(${d30_retained_users},0);;
     drill_fields: [drill_field,d30_revenue_per_retained_user]
