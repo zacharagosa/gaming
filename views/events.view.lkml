@@ -106,7 +106,7 @@ view: events {
       quarter,
       year
     ]
-    sql: DATETIME_SUB(${TABLE}.next_session_start) ;;
+    sql: ${TABLE}.next_session_start ;;
     hidden: yes
   }
 
