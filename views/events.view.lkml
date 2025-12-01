@@ -107,6 +107,7 @@ view: events {
       year
     ]
     sql: DATETIME_SUB(${TABLE}.next_session_start) ;;
+    hidden: yes
   }
 
 
