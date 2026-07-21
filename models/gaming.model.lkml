@@ -94,3 +94,19 @@ explore: level_balancing {
     sql_on: ${level_balancing.user_id} = ${user_facts.user_id} ;;
   }
 }
+
+explore: player_safety_incidents {
+  label: "Player Safety & Incidents"
+  description: "Live moderation telemetry, harm vector breakdown, and incident resolution tracking"
+}
+
+explore: toxicity_exposure_retention_daily {
+  label: "Toxicity Exposure & Retention Impact"
+  description: "Analysis of toxic match exposure on D1 retention rates and 7-day LTV spend"
+}
+
+explore: community_sportsmanship_daily {
+  label: "Community Sportsmanship & Moderation Velocity"
+  description: "Community honor score distribution, auto-action rates, and response velocity"
+}
+
