@@ -5,15 +5,16 @@ include: "/derived_tables/*.view.lkml"
 include: "/lookml_dashboards/*.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
 # Model Configuration
-datagroup: events_raw { sql_trigger:  SELECT CURRENT_DATE()  ;;
+datagroup: events_raw {
+  sql_trigger: SELECT CURRENT_DATE() ;;
   max_cache_age: "24 hours"
 }
+
 named_value_format: large_usd { value_format: "[>=1000000]\"$\"0.00,,\"M\";[>=1000]\"$\"0.00,\"K\";\"$\"0.00" }
 named_value_format: large_number { value_format: "[>=1000000]0.00,,\"M\";[>=1000]0.00,\"K\";0" }
 
 # Explores
 explore: events {
-
   persist_with: events_raw
 
   aggregate_table: revenue {
@@ -26,8 +27,6 @@ explore: events {
       datagroup_trigger: events_raw
     }
   }
-
-
 
   join: session_facts {
     relationship: many_to_one
@@ -69,7 +68,6 @@ explore: funnel_explorer {
     sql_on: ${funnel_explorer.user_id} = ${user_facts.user_id} ;;
     relationship: many_to_one
   }
-
 }
 
 explore: session_facts {
@@ -110,3 +108,7 @@ explore: community_sportsmanship_daily {
   description: "Community honor score distribution, auto-action rates, and response velocity"
 }
 
+explore: gaming_hybrid_search {
+  label: "⚡ BigQuery Hybrid Search (Semantic + Lexical BM25)"
+  description: "Interactive demo of BigQuery Hybrid Search natively combining vector similarity and BM25 lexical keyword matching with Reciprocal Rank Fusion"
+}
