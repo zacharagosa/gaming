@@ -17,10 +17,35 @@ named_value_format: large_number { value_format: "[>=1000000]0.00,,\"M\";[>=1000
 explore: events {
   persist_with: events_raw
 
+
+  aggregate_table: monthly_users {
+    query: {
+      dimensions: [events.event_month]
+      measures: [events.number_of_users]
+      timezone: "America/New_York"
+    }
+    materialization: {
+      datagroup_trigger: events_raw
+    }
+  }
+
+  aggregate_table: daily_overview {
+    query: {
+      dimensions: [events.event_date, events.game_name]
+      measures: [events.number_of_users, events.number_of_new_users, events.total_revenue]
+      timezone: "America/New_York"
+    }
+    materialization: {
+      increment_key: event_date
+      datagroup_trigger: events_raw
+    }
+  }
+
   aggregate_table: revenue {
     query: {
       dimensions: [events.event_name,events.event_date,events.game_name,events.country,events.device_platform,events.install_source,events.install_group]
       measures: [events.total_revenue,events.average_revenue_per_user,events.return_on_ad_spend,events.number_of_new_users,events.number_of_users,events.cost_per_install,events.total_install_spend,events.d1_retention_rate,events.d7_retention_rate]
+      timezone: "America/New_York"
     }
     materialization: {
       increment_key: event_date

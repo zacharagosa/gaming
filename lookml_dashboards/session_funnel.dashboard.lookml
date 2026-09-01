@@ -7,25 +7,43 @@
     model: gaming
     explore: funnel_explorer
     type: looker_column
-    fields: [funnel_explorer.count_sessions_event1, funnel_explorer.count_sessions_event12,
-      funnel_explorer.count_sessions_event123, funnel_explorer.count_sessions_event1234,
-      session_facts.game_version]
+    fields:
+    - funnel_explorer.count_sessions_event1
+    - funnel_explorer.count_sessions_event12
+    - funnel_explorer.count_sessions_event123
+    - funnel_explorer.count_sessions_event1234
+    - session_facts.game_version
     filters:
       funnel_explorer.event_time: 14 days
-    sorts: [session_facts.game_version]
+    sorts:
+    - session_facts.game_version
     limit: 500
     query_timezone: America/Los_Angeles
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
-    y_axes: [{label: '', orientation: left, series: [{axisId: funnel_explorer.count_sessions_event1,
-            id: funnel_explorer.count_sessions_event1, name: '"Match_Started"'}, {
-            axisId: funnel_explorer.count_sessions_event12, id: funnel_explorer.count_sessions_event12,
-            name: '"Match_Ended"'}, {axisId: funnel_explorer.count_sessions_event123,
-            id: funnel_explorer.count_sessions_event123, name: '"Skin_Unlocked"'},
-          {axisId: funnel_explorer.count_sessions_event1234, id: funnel_explorer.count_sessions_event1234,
-            name: '"in_app_purchase"'}], showLabels: true, showValues: true, unpinAxis: false,
-        tickDensity: default, tickDensityCustom: 5, type: log}]
+    y_axes:
+    - label: ''
+      orientation: left
+      series:
+      - axisId: funnel_explorer.count_sessions_event1
+        id: funnel_explorer.count_sessions_event1
+        name: '"Match_Started"'
+      - axisId: funnel_explorer.count_sessions_event12
+        id: funnel_explorer.count_sessions_event12
+        name: '"Match_Ended"'
+      - axisId: funnel_explorer.count_sessions_event123
+        id: funnel_explorer.count_sessions_event123
+        name: '"Skin_Unlocked"'
+      - axisId: funnel_explorer.count_sessions_event1234
+        id: funnel_explorer.count_sessions_event1234
+        name: '"in_app_purchase"'
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: log
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
@@ -50,7 +68,7 @@
     show_dropoff: true
     show_totals_labels: false
     show_silhouette: false
-    totals_color: "#808080"
+    totals_color: '#808080'
     listen:
       Date Range: funnel_explorer.session_start_date
       Game Name: funnel_explorer.game_name
@@ -63,9 +81,11 @@
     col: 8
     width: 16
     height: 12
-  - name: "<span class='fa fa-filter'> Session Funnel </span>"
+    modern2026: true
+    collection_id: looker_2026
+  - name: <span class='fa fa-filter'> Session Funnel </span>
     type: text
-    title_text: "<span class='fa fa-filter'> Session Funnel </span>"
+    title_text: <span class='fa fa-filter'> Session Funnel </span>
     body_text: "This flexible funnel tracks movement of players through sequences\
       \ of events (defined in the filters). Identifying where the drops are and addressing\
       \ retention issues. \n\n**Note, this funnel looks at events that occurred within\
@@ -113,7 +133,8 @@
     required: false
     model: gaming
     explore: funnel_explorer
-    listens_to_filters: [Game Name]
+    listens_to_filters:
+    - Game Name
     field: funnel_explorer.event_1
   - name: Event 2
     title: Event 2
@@ -123,7 +144,8 @@
     required: false
     model: gaming
     explore: funnel_explorer
-    listens_to_filters: [Game Name]
+    listens_to_filters:
+    - Game Name
     field: funnel_explorer.event_2
   - name: Event 3
     title: Event 3
@@ -133,7 +155,8 @@
     required: false
     model: gaming
     explore: funnel_explorer
-    listens_to_filters: [Game Name]
+    listens_to_filters:
+    - Game Name
     field: funnel_explorer.event_3
   - name: Event 4
     title: Event 4
@@ -143,5 +166,8 @@
     required: false
     model: gaming
     explore: funnel_explorer
-    listens_to_filters: [Game Name]
+    listens_to_filters:
+    - Game Name
     field: funnel_explorer.event_4
+  style: modern
+  preferred_viewer: dashboards-next

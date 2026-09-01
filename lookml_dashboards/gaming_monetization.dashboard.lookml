@@ -2,27 +2,27 @@
   title: Game Monetization
   layout: newspaper
   elements:
-  - name: "<span class='fa fa-coffee'> Ad Revenue </span>"
+  - name: <span class='fa fa-coffee'> Ad Revenue </span>
     type: text
-    title_text: "<span class='fa fa-coffee'> Ad Revenue </span>"
+    title_text: <span class='fa fa-coffee'> Ad Revenue </span>
     subtitle_text: Are we doing well monetizing with ads while not affecting gameplay?
     row: 18
     col: 0
     width: 24
     height: 2
-  - name: "<span class='fa fa-credit-card'> IAP Revenue </span>"
+  - name: <span class='fa fa-credit-card'> IAP Revenue </span>
     type: text
-    title_text: "<span class='fa fa-credit-card'> IAP Revenue </span>"
+    title_text: <span class='fa fa-credit-card'> IAP Revenue </span>
     subtitle_text: Are users finding our in-app products attractive?
     body_text: ''
     row: 9
     col: 0
     width: 24
     height: 2
-  - name: "<span class='fa fa-usd'> Monetization </span>"
+  - name: <span class='fa fa-usd'> Monetization </span>
     type: text
-    title_text: "<span class='fa fa-usd'> Monetization </span>"
-    subtitle_text: "<p> Are we building a sustainable business? </p>"
+    title_text: <span class='fa fa-usd'> Monetization </span>
+    subtitle_text: <p> Are we building a sustainable business? </p>
     row: 0
     col: 0
     width: 24
@@ -32,7 +32,8 @@
     model: gaming
     explore: events
     type: single_value
-    fields: [events.total_revenue]
+    fields:
+    - events.total_revenue
     filters: {}
     limit: 500
     query_timezone: America/Los_Angeles
@@ -50,19 +51,31 @@
     col: 8
     width: 4
     height: 3
+    modern2026: true
+    collection_id: looker_2026
   - title: ARPDAU - Ads
     name: ARPDAU - Ads
     model: gaming
     explore: events
     type: single_value
-    fields: [events.average_ad_revenue_per_user, events.event_date]
-    fill_fields: [events.event_date]
+    fields:
+    - events.average_ad_revenue_per_user
+    - events.event_date
+    fill_fields:
+    - events.event_date
     filters: {}
     limit: 500
-    dynamic_fields: [{table_calculation: arpdau_ads, label: ARPDAU - Ads, expression: 'mean(${events.average_ad_revenue_per_user})',
-        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: arpdau_ads
+      label: ARPDAU - Ads
+      expression: mean(${events.average_ad_revenue_per_user})
+      value_format: null
+      value_format_name: usd
+      _kind_hint: measure
+      _type_hint: number
     query_timezone: America/Los_Angeles
-    hidden_fields: [events.average_ad_revenue_per_user]
+    hidden_fields:
+    - events.average_ad_revenue_per_user
     note_state: collapsed
     note_display: hover
     note_text: Average Revenue Per Daily Active User - for ad revenue only
@@ -77,34 +90,63 @@
     col: 20
     width: 4
     height: 3
+    modern2026: true
+    collection_id: looker_2026
   - title: Revenue After UA
     name: Revenue After UA
     model: gaming
     explore: events
     type: looker_column
-    fields: [events.event_date, events.total_revenue, events.total_install_spend]
-    fill_fields: [events.event_date]
+    fields:
+    - events.event_date
+    - events.total_revenue
+    - events.total_install_spend
+    fill_fields:
+    - events.event_date
     filters: {}
-    sorts: [events.event_date desc]
+    sorts:
+    - events.event_date desc
     limit: 500
     column_limit: 50
-    dynamic_fields: [{table_calculation: ua, label: UA, expression: "${events.total_install_spend}\
-          \ * -1", value_format: !!null '', value_format_name: usd_0, _kind_hint: measure,
-        _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: ua
+      label: UA
+      expression: ${events.total_install_spend} * -1
+      value_format: null
+      value_format_name: usd_0
+      _kind_hint: measure
+      _type_hint: number
     color_application:
-      collection_id: 611da387-0e33-4239-aef0-a187c149cf88
+      collection_id: looker_2026
       palette_id: f31efe28-e698-428c-8420-fcb37f2010aa
       options:
         steps: 5
     x_axis_gridlines: false
     y_axis_gridlines: false
     show_view_names: false
-    y_axes: [{label: '', orientation: left, series: [{axisId: events.total_revenue,
-            id: events.total_revenue, name: Total Revenue}], showLabels: true, showValues: true,
-        unpinAxis: false, tickDensity: default, type: linear}, {label: !!null '',
-        orientation: right, series: [{axisId: events.average_revenue_per_spender,
-            id: events.average_revenue_per_spender, name: ARPPU (IAP)}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, type: linear}]
+    y_axes:
+    - label: ''
+      orientation: left
+      series:
+      - axisId: events.total_revenue
+        id: events.total_revenue
+        name: Total Revenue
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      type: linear
+    - label: null
+      orientation: right
+      series:
+      - axisId: events.average_revenue_per_spender
+        id: events.average_revenue_per_spender
+        name: ARPPU (IAP)
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      type: linear
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
@@ -132,10 +174,11 @@
     show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
-    totals_color: "#808080"
+    totals_color: '#808080'
     show_null_points: true
     interpolation: linear
-    hidden_fields: [events.total_install_spend]
+    hidden_fields:
+    - events.total_install_spend
     title_hidden: true
     listen:
       Date Range: events.event_date
@@ -148,12 +191,14 @@
     col: 8
     width: 8
     height: 4
+    modern2026: true
   - title: Revenue after UA
     name: Revenue after UA
     model: gaming
     explore: events
     type: single_value
-    fields: [events.total_revenue_after_UA]
+    fields:
+    - events.total_revenue_after_UA
     filters: {}
     limit: 500
     query_timezone: America/Los_Angeles
@@ -171,20 +216,33 @@
     col: 12
     width: 4
     height: 3
+    modern2026: true
+    collection_id: looker_2026
   - title: ARPDAU - IAP
     name: ARPDAU - IAP
     model: gaming
     explore: events
     type: single_value
-    fields: [events.average_iap_revenue_per_user, events.event_date]
-    fill_fields: [events.event_date]
+    fields:
+    - events.average_iap_revenue_per_user
+    - events.event_date
+    fill_fields:
+    - events.event_date
     filters: {}
-    sorts: [events.event_date desc]
+    sorts:
+    - events.event_date desc
     limit: 500
-    dynamic_fields: [{table_calculation: arpdau_iap, label: ARPDAU - IAP, expression: 'mean(${events.average_iap_revenue_per_user})',
-        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: arpdau_iap
+      label: ARPDAU - IAP
+      expression: mean(${events.average_iap_revenue_per_user})
+      value_format: null
+      value_format_name: usd
+      _kind_hint: measure
+      _type_hint: number
     query_timezone: America/Los_Angeles
-    hidden_fields: [events.average_iap_revenue_per_user]
+    hidden_fields:
+    - events.average_iap_revenue_per_user
     y_axes: []
     note_state: collapsed
     note_display: hover
@@ -201,29 +259,47 @@
     col: 16
     width: 4
     height: 3
+    modern2026: true
+    collection_id: looker_2026
   - title: IAP/Ad Revenue per Player
     name: IAP/Ad Revenue per Player
     model: gaming
     explore: events
     type: looker_column
-    fields: [events.event_date, events.average_ad_revenue_per_user, events.average_iap_revenue_per_user]
-    fill_fields: [events.event_date]
+    fields:
+    - events.event_date
+    - events.average_ad_revenue_per_user
+    - events.average_iap_revenue_per_user
+    fill_fields:
+    - events.event_date
     filters: {}
-    sorts: [events.event_date desc]
+    sorts:
+    - events.event_date desc
     limit: 500
     column_limit: 50
     color_application:
-      collection_id: 611da387-0e33-4239-aef0-a187c149cf88
+      collection_id: looker_2026
       palette_id: f31efe28-e698-428c-8420-fcb37f2010aa
       options:
         steps: 5
     x_axis_gridlines: false
     y_axis_gridlines: false
     show_view_names: false
-    y_axes: [{label: '', orientation: left, series: [{axisId: events.average_ad_revenue_per_user,
-            id: events.average_ad_revenue_per_user, name: ARPU - Ads}, {axisId: events.average_iap_revenue_per_user,
-            id: events.average_iap_revenue_per_user, name: ARPU - IAP}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, type: linear}]
+    y_axes:
+    - label: ''
+      orientation: left
+      series:
+      - axisId: events.average_ad_revenue_per_user
+        id: events.average_ad_revenue_per_user
+        name: ARPU - Ads
+      - axisId: events.average_iap_revenue_per_user
+        id: events.average_iap_revenue_per_user
+        name: ARPU - IAP
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      type: linear
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
@@ -253,7 +329,7 @@
     show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
-    totals_color: "#808080"
+    totals_color: '#808080'
     show_null_points: true
     interpolation: linear
     hidden_fields: []
@@ -269,42 +345,88 @@
     col: 16
     width: 8
     height: 4
+    modern2026: true
   - title: LTV (0-7 days) Per Country
     name: LTV (0-7 days) Per Country
     model: gaming
     explore: events
     type: looker_column
-    fields: [events.retention_day, events.average_revenue_per_user, events.cost_per_install,
-      events.country]
-    pivots: [events.country]
+    fields:
+    - events.retention_day
+    - events.average_revenue_per_user
+    - events.cost_per_install
+    - events.country
+    pivots:
+    - events.country
     filters:
-      events.retention_day: "<=7"
-    sorts: [events.country 0, events.retention_day]
+      events.retention_day: <=7
+    sorts:
+    - events.country 0
+    - events.retention_day
     limit: 500
     column_limit: 50
-    dynamic_fields: [{table_calculation: ltv_total, label: LTV - Total, expression: 'running_total(${events.average_revenue_per_user})',
-        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
-      {table_calculation: less_than_cpi, label: Less than CPI, expression: 'if(${ltv_total}
-          < ${cpi},${ltv_total},null)', value_format: !!null '', value_format_name: usd,
-        _kind_hint: measure, _type_hint: number}, {table_calculation: more_than_cpi,
-        label: More than CPI, expression: 'if(${ltv_total} >= ${cpi},${ltv_total},null)',
-        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number},
-      {table_calculation: cpi, label: CPI, expression: 'running_total(${events.cost_per_install})',
-        value_format: !!null '', value_format_name: usd, _kind_hint: measure, _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: ltv_total
+      label: LTV - Total
+      expression: running_total(${events.average_revenue_per_user})
+      value_format: null
+      value_format_name: usd
+      _kind_hint: measure
+      _type_hint: number
+    - table_calculation: less_than_cpi
+      label: Less than CPI
+      expression: if(${ltv_total} < ${cpi},${ltv_total},null)
+      value_format: null
+      value_format_name: usd
+      _kind_hint: measure
+      _type_hint: number
+    - table_calculation: more_than_cpi
+      label: More than CPI
+      expression: if(${ltv_total} >= ${cpi},${ltv_total},null)
+      value_format: null
+      value_format_name: usd
+      _kind_hint: measure
+      _type_hint: number
+    - table_calculation: cpi
+      label: CPI
+      expression: running_total(${events.cost_per_install})
+      value_format: null
+      value_format_name: usd
+      _kind_hint: measure
+      _type_hint: number
     color_application:
-      collection_id: 611da387-0e33-4239-aef0-a187c149cf88
+      collection_id: looker_2026
       palette_id: f31efe28-e698-428c-8420-fcb37f2010aa
       options:
         steps: 5
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
-    y_axes: [{label: '', orientation: left, series: [{id: events.total_revenue, name: Total
-              Revenue, axisId: events.total_revenue}], showLabels: true, showValues: true,
-        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear},
-      {label: !!null '', orientation: right, series: [{id: ltv, name: LTV, axisId: ltv}],
-        showLabels: true, showValues: true, unpinAxis: false, tickDensity: default,
-        tickDensityCustom: 5, type: linear}]
+    y_axes:
+    - label: ''
+      orientation: left
+      series:
+      - id: events.total_revenue
+        name: Total Revenue
+        axisId: events.total_revenue
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: linear
+    - label: null
+      orientation: right
+      series:
+      - id: ltv
+        name: LTV
+        axisId: ltv
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: linear
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
@@ -325,45 +447,45 @@
     series_types: {}
     point_style: none
     series_colors:
-      Brazil - less_than_1: "#FFEB3B"
-      Brazil - more_than_1: "#4CAF50"
-      France - less_than_1: "#FFEB3B"
-      France - more_than_1: "#4CAF50"
-      Germany - less_than_1: "#FFEB3B"
-      Germany - more_than_1: "#4CAF50"
-      Mexico - more_than_1: "#4CAF50"
-      Mexico - less_than_1: "#FFEB3B"
-      Poland - less_than_1: "#FFEB3B"
-      Poland - more_than_1: "#4CAF50"
-      Russia - less_than_1: "#FFEB3B"
-      Russia - more_than_1: "#4CAF50"
-      Turkey - less_than_1: "#FFEB3B"
-      Turkey - more_than_1: "#4CAF50"
-      United Kingdom - less_than_1: "#FFEB3B"
-      United Kingdom - more_than_1: "#4CAF50"
-      United States - more_than_1: "#4CAF50"
-      United States - less_than_1: "#FFEB3B"
-      Vietnam - less_than_1: "#FFEB3B"
-      Vietnam - more_than_1: "#4CAF50"
-      Brazil - less_than_cpi: "#CDDC39"
-      Brazil - more_than_cpi: "#009688"
-      France - less_than_cpi: "#CDDC39"
-      Germany - less_than_cpi: "#CDDC39"
-      Germany - more_than_cpi: "#009688"
-      Mexico - less_than_cpi: "#CDDC39"
-      Mexico - more_than_cpi: "#009688"
-      Poland - less_than_cpi: "#CDDC39"
-      Poland - more_than_cpi: "#009688"
-      Russia - less_than_cpi: "#CDDC39"
-      Russia - more_than_cpi: "#009688"
-      Turkey - less_than_cpi: "#CDDC39"
-      Turkey - more_than_cpi: "#009688"
-      United Kingdom - less_than_cpi: "#CDDC39"
-      United Kingdom - more_than_cpi: "#009688"
-      United States - less_than_cpi: "#CDDC39"
-      United States - more_than_cpi: "#009688"
-      Vietnam - less_than_cpi: "#CDDC39"
-      Vietnam - more_than_cpi: "#009688"
+      Brazil - less_than_1: '#FFEB3B'
+      Brazil - more_than_1: '#4CAF50'
+      France - less_than_1: '#FFEB3B'
+      France - more_than_1: '#4CAF50'
+      Germany - less_than_1: '#FFEB3B'
+      Germany - more_than_1: '#4CAF50'
+      Mexico - more_than_1: '#4CAF50'
+      Mexico - less_than_1: '#FFEB3B'
+      Poland - less_than_1: '#FFEB3B'
+      Poland - more_than_1: '#4CAF50'
+      Russia - less_than_1: '#FFEB3B'
+      Russia - more_than_1: '#4CAF50'
+      Turkey - less_than_1: '#FFEB3B'
+      Turkey - more_than_1: '#4CAF50'
+      United Kingdom - less_than_1: '#FFEB3B'
+      United Kingdom - more_than_1: '#4CAF50'
+      United States - more_than_1: '#4CAF50'
+      United States - less_than_1: '#FFEB3B'
+      Vietnam - less_than_1: '#FFEB3B'
+      Vietnam - more_than_1: '#4CAF50'
+      Brazil - less_than_cpi: '#CDDC39'
+      Brazil - more_than_cpi: '#009688'
+      France - less_than_cpi: '#CDDC39'
+      Germany - less_than_cpi: '#CDDC39'
+      Germany - more_than_cpi: '#009688'
+      Mexico - less_than_cpi: '#CDDC39'
+      Mexico - more_than_cpi: '#009688'
+      Poland - less_than_cpi: '#CDDC39'
+      Poland - more_than_cpi: '#009688'
+      Russia - less_than_cpi: '#CDDC39'
+      Russia - more_than_cpi: '#009688'
+      Turkey - less_than_cpi: '#CDDC39'
+      Turkey - more_than_cpi: '#009688'
+      United Kingdom - less_than_cpi: '#CDDC39'
+      United Kingdom - more_than_cpi: '#009688'
+      United States - less_than_cpi: '#CDDC39'
+      United States - more_than_cpi: '#009688'
+      Vietnam - less_than_cpi: '#CDDC39'
+      Vietnam - more_than_cpi: '#009688'
     show_value_labels: false
     label_density: 25
     x_axis_scale: auto
@@ -373,11 +495,14 @@
     show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
-    totals_color: "#808080"
+    totals_color: '#808080'
     show_null_points: true
     interpolation: linear
-    hidden_fields: [events.average_revenue_per_user, ltv_total, events.cost_per_install,
-      cpi]
+    hidden_fields:
+    - events.average_revenue_per_user
+    - ltv_total
+    - events.cost_per_install
+    - cpi
     note_state: collapsed
     note_display: hover
     note_text: How long does it take to make our CPI back?
@@ -392,19 +517,21 @@
     col: 0
     width: 24
     height: 11
-  - title: "% Spenders"
-    name: "% Spenders"
+    modern2026: true
+  - title: '% Spenders'
+    name: '% Spenders'
     model: gaming
     explore: events
     type: single_value
-    fields: [events.percent_spenders]
+    fields:
+    - events.percent_spenders
     filters: {}
     limit: 500
     query_timezone: America/Los_Angeles
     series_types: {}
-    up_color: "#2196F3"
-    down_color: "#03d7f4"
-    total_color: "#00BCD4"
+    up_color: '#2196F3'
+    down_color: '#03d7f4'
+    total_color: '#00BCD4'
     listen:
       Date Range: events.event_date
       Drill Down: events.drill_by
@@ -416,17 +543,21 @@
     col: 10
     width: 7
     height: 2
+    modern2026: true
+    collection_id: looker_2026
   - title: Revenue Breadkdown
     name: Revenue Breadkdown
     model: gaming
     explore: events
     type: looker_bar
-    fields: [events.total_iap_revenue, events.total_ad_revenue]
+    fields:
+    - events.total_iap_revenue
+    - events.total_ad_revenue
     filters: {}
     limit: 500
     query_timezone: America/Los_Angeles
     color_application:
-      collection_id: 611da387-0e33-4239-aef0-a187c149cf88
+      collection_id: looker_2026
       palette_id: f31efe28-e698-428c-8420-fcb37f2010aa
       options:
         steps: 5
@@ -462,10 +593,10 @@
     show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
-    totals_color: "#808080"
-    up_color: "#2196F3"
-    down_color: "#03d7f4"
-    total_color: "#00BCD4"
+    totals_color: '#808080'
+    up_color: '#2196F3'
+    down_color: '#03d7f4'
+    total_color: '#00BCD4'
     listen:
       Date Range: events.event_date
       Drill Down: events.drill_by
@@ -477,30 +608,59 @@
     col: 0
     width: 8
     height: 7
+    modern2026: true
   - title: IAP Purchase Sizes
     name: IAP Purchase Sizes
     model: gaming
     explore: events
     type: looker_scatter
-    fields: [events.iap_purchase_tier, events.total_iap_revenue, events.number_of_iap_purchases]
+    fields:
+    - events.iap_purchase_tier
+    - events.total_iap_revenue
+    - events.number_of_iap_purchases
     filters:
-      events.iap_purchase_tier: "-Below 0,-Undefined"
-    sorts: [events.iap_purchase_tier]
+      events.iap_purchase_tier: -Below 0,-Undefined
+    sorts:
+    - events.iap_purchase_tier
     limit: 500
     column_limit: 50
     total: true
-    dynamic_fields: [{table_calculation: of_total, label: "% of total", expression: "${events.total_iap_revenue}/\
-          \ ${events.total_iap_revenue:total}", value_format: !!null '', value_format_name: percent_2,
-        _kind_hint: measure, _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: of_total
+      label: '% of total'
+      expression: ${events.total_iap_revenue}/ ${events.total_iap_revenue:total}
+      value_format: null
+      value_format_name: percent_2
+      _kind_hint: measure
+      _type_hint: number
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
-    y_axes: [{label: '', orientation: left, series: [{axisId: events.total_iap_revenue,
-            id: events.total_iap_revenue, name: Total IAP Revenue}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: of_total,
-            id: of_total, name: "% of total"}], showLabels: true, showValues: true,
-        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
+    y_axes:
+    - label: ''
+      orientation: left
+      series:
+      - axisId: events.total_iap_revenue
+        id: events.total_iap_revenue
+        name: Total IAP Revenue
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: linear
+    - label: null
+      orientation: right
+      series:
+      - axisId: of_total
+        id: of_total
+        name: '% of total'
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: linear
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
@@ -528,7 +688,7 @@
     show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
-    totals_color: "#808080"
+    totals_color: '#808080'
     listen:
       Date Range: events.event_date
       Drill Down: events.drill_by
@@ -545,7 +705,8 @@
     model: gaming
     explore: events
     type: single_value
-    fields: [events.transactions_per_spender]
+    fields:
+    - events.transactions_per_spender
     filters: {}
     limit: 500
     column_limit: 50
@@ -562,29 +723,59 @@
     col: 17
     width: 7
     height: 2
+    modern2026: true
+    collection_id: looker_2026
   - title: Retaining Spenders
     name: Retaining Spenders
     model: gaming
     explore: events
     type: looker_column
-    fields: [events.retention_day, events.percent_spenders, events.total_iap_revenue]
+    fields:
+    - events.retention_day
+    - events.percent_spenders
+    - events.total_iap_revenue
     filters:
-      events.retention_day: "<=70"
-    sorts: [events.retention_day]
+      events.retention_day: <=70
+    sorts:
+    - events.retention_day
     limit: 500
     column_limit: 50
-    dynamic_fields: [{table_calculation: total_iap_revenue, label: Total IAP Revenue,
-        expression: 'running_total(${events.total_iap_revenue})', value_format: !!null '',
-        value_format_name: usd_0, _kind_hint: measure, _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: total_iap_revenue
+      label: Total IAP Revenue
+      expression: running_total(${events.total_iap_revenue})
+      value_format: null
+      value_format_name: usd_0
+      _kind_hint: measure
+      _type_hint: number
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_view_names: false
-    y_axes: [{label: '', orientation: left, series: [{axisId: events.percent_spenders,
-            id: events.percent_spenders, name: Percent Spenders}], showLabels: true,
-        showValues: true, unpinAxis: false, tickDensity: default, tickDensityCustom: 5,
-        type: linear}, {label: !!null '', orientation: right, series: [{axisId: total_iap_revenue,
-            id: total_iap_revenue, name: Total IAP Revenue}], showLabels: true, showValues: true,
-        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
+    y_axes:
+    - label: ''
+      orientation: left
+      series:
+      - axisId: events.percent_spenders
+        id: events.percent_spenders
+        name: Percent Spenders
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: linear
+    - label: null
+      orientation: right
+      series:
+      - axisId: total_iap_revenue
+        id: total_iap_revenue
+        name: Total IAP Revenue
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: linear
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
@@ -598,7 +789,8 @@
     trellis: ''
     stacking: ''
     limit_displayed_rows: false
-    hidden_series: [transactions_per_spender]
+    hidden_series:
+    - transactions_per_spender
     legend_position: center
     series_types:
       total_iap_revenue: line
@@ -612,8 +804,9 @@
     show_null_labels: false
     show_totals_labels: false
     show_silhouette: false
-    totals_color: "#808080"
-    hidden_fields: [events.total_iap_revenue]
+    totals_color: '#808080'
+    hidden_fields:
+    - events.total_iap_revenue
     note_state: expanded
     note_display: hover
     note_text: The "whales" don't become whales for a long time
@@ -628,21 +821,31 @@
     col: 10
     width: 14
     height: 5
+    modern2026: true
+    collection_id: looker_2026
   - title: Revenue per Ad Shown
     name: Revenue per Ad Shown
     model: gaming
     explore: events
     type: looker_map
-    fields: [events.country, events.number_of_ads_shown, events.total_ad_revenue]
+    fields:
+    - events.country
+    - events.number_of_ads_shown
+    - events.total_ad_revenue
     filters:
-      events.number_of_ads_shown: ">1000"
-    sorts: [revenue_per_ad_shown desc]
+      events.number_of_ads_shown: '>1000'
+    sorts:
+    - revenue_per_ad_shown desc
     limit: 500
     column_limit: 50
-    dynamic_fields: [{table_calculation: revenue_per_ad_shown, label: Revenue per
-          Ad Shown, expression: "${events.total_ad_revenue}/${events.number_of_ads_shown}",
-        value_format: "$#.000", value_format_name: !!null '', _kind_hint: measure,
-        _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: revenue_per_ad_shown
+      label: Revenue per Ad Shown
+      expression: ${events.total_ad_revenue}/${events.number_of_ads_shown}
+      value_format: $#.000
+      value_format_name: null
+      _kind_hint: measure
+      _type_hint: number
     map_plot_mode: points
     heatmap_gridlines: false
     heatmap_gridlines_empty: false
@@ -665,10 +868,13 @@
     map_marker_color_mode: fixed
     show_view_names: false
     show_legend: true
-    map_value_colors: ["#8BC34A"]
+    map_value_colors:
+    - '#8BC34A'
     quantize_map_value_colors: false
     reverse_map_value_colors: true
-    hidden_fields: [events.total_ad_revenue, events.number_of_ads_shown]
+    hidden_fields:
+    - events.total_ad_revenue
+    - events.number_of_ads_shown
     note_state: expanded
     note_display: hover
     note_text: Where are networks paying the most for the ads we show in the app?
@@ -688,15 +894,21 @@
     model: gaming
     explore: events
     type: single_value
-    fields: [events.number_of_ads_shown, events.total_ad_revenue]
+    fields:
+    - events.number_of_ads_shown
+    - events.total_ad_revenue
     filters:
-      events.number_of_ads_shown: ">1000"
+      events.number_of_ads_shown: '>1000'
     limit: 500
     column_limit: 50
-    dynamic_fields: [{table_calculation: revenue_per_ad_shown, label: Revenue per
-          Ad Shown, expression: "${events.total_ad_revenue}/${events.number_of_ads_shown}",
-        value_format: "$0.000", value_format_name: !!null '', _kind_hint: measure,
-        _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: revenue_per_ad_shown
+      label: Revenue per Ad Shown
+      expression: ${events.total_ad_revenue}/${events.number_of_ads_shown}
+      value_format: $0.000
+      value_format_name: null
+      _kind_hint: measure
+      _type_hint: number
     map_plot_mode: points
     heatmap_gridlines: false
     heatmap_gridlines_empty: false
@@ -719,10 +931,13 @@
     map_marker_color_mode: fixed
     show_view_names: false
     show_legend: true
-    map_value_colors: ["#8BC34A"]
+    map_value_colors:
+    - '#8BC34A'
     quantize_map_value_colors: false
     reverse_map_value_colors: true
-    hidden_fields: [events.total_ad_revenue, events.number_of_ads_shown]
+    hidden_fields:
+    - events.total_ad_revenue
+    - events.number_of_ads_shown
     series_types: {}
     note_state: expanded
     note_display: hover
@@ -739,20 +954,28 @@
     col: 10
     width: 8
     height: 2
+    modern2026: true
+    collection_id: looker_2026
   - title: Ads Per Session
     name: Ads Per Session
     model: gaming
     explore: events
     type: single_value
-    fields: [events.number_of_ads_shown, events.number_of_sesssions]
+    fields:
+    - events.number_of_ads_shown
+    - events.number_of_sesssions
     filters:
-      events.number_of_ads_shown: ">1000"
+      events.number_of_ads_shown: '>1000'
     limit: 500
     column_limit: 50
-    dynamic_fields: [{table_calculation: ads_per_session, label: Ads per Session,
-        expression: "${events.number_of_ads_shown}/${events.number_of_sesssions}",
-        value_format: !!null '', value_format_name: decimal_1, _kind_hint: measure,
-        _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: ads_per_session
+      label: Ads per Session
+      expression: ${events.number_of_ads_shown}/${events.number_of_sesssions}
+      value_format: null
+      value_format_name: decimal_1
+      _kind_hint: measure
+      _type_hint: number
     map_plot_mode: points
     heatmap_gridlines: false
     heatmap_gridlines_empty: false
@@ -775,10 +998,13 @@
     map_marker_color_mode: fixed
     show_view_names: false
     show_legend: true
-    map_value_colors: ["#8BC34A"]
+    map_value_colors:
+    - '#8BC34A'
     quantize_map_value_colors: false
     reverse_map_value_colors: true
-    hidden_fields: [events.number_of_ads_shown, events.number_of_sesssions]
+    hidden_fields:
+    - events.number_of_ads_shown
+    - events.number_of_sesssions
     series_types: {}
     note_state: expanded
     note_display: hover
@@ -794,9 +1020,11 @@
     col: 18
     width: 6
     height: 2
-  - name: "<span class='fa fa-money'> CPI Recovery </span>"
+    modern2026: true
+    collection_id: looker_2026
+  - name: <span class='fa fa-money'> CPI Recovery </span>
     type: text
-    title_text: "<span class='fa fa-money'> CPI Recovery </span>"
+    title_text: <span class='fa fa-money'> CPI Recovery </span>
     subtitle_text: How quickly are we recovering our marketing costs?
     body_text: ''
     row: 29
@@ -808,32 +1036,64 @@
     model: gaming
     explore: events
     type: table
-    fields: [events.number_of_ads_shown, events.total_ad_revenue, events.ad_network]
+    fields:
+    - events.number_of_ads_shown
+    - events.total_ad_revenue
+    - events.ad_network
     filters:
-      events.number_of_ads_shown: ">1000"
-    sorts: [revenue_per_ad_shown desc]
+      events.number_of_ads_shown: '>1000'
+    sorts:
+    - revenue_per_ad_shown desc
     limit: 500
     column_limit: 50
-    dynamic_fields: [{table_calculation: revenue_per_ad_shown, label: Revenue per
-          Ad Shown, expression: "${events.total_ad_revenue}/${events.number_of_ads_shown}",
-        value_format: "$0.000", value_format_name: !!null '', _kind_hint: measure,
-        _type_hint: number}]
+    dynamic_fields:
+    - table_calculation: revenue_per_ad_shown
+      label: Revenue per Ad Shown
+      expression: ${events.total_ad_revenue}/${events.number_of_ads_shown}
+      value_format: $0.000
+      value_format_name: null
+      _kind_hint: measure
+      _type_hint: number
     show_view_names: false
     show_row_numbers: true
     truncate_column_names: false
     hide_totals: false
     hide_row_totals: false
-    table_theme: gray
+    table_theme: modern
     limit_displayed_rows: false
     enable_conditional_formatting: true
-    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#3EB0D5",
-        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
-          palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825}, bold: false, italic: false,
-        strikethrough: false, fields: [revenue_per_ad_shown]}, {type: along a scale...,
-        value: !!null '', background_color: "#3EB0D5", font_color: !!null '', color_application: {
-          collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7, palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688,
-          options: {steps: 5, constraints: {mid: {type: middle}}, reverse: true, mirror: false}},
-        bold: false, italic: false, strikethrough: false, fields: [events.number_of_ads_shown]}]
+    conditional_formatting:
+    - type: along a scale...
+      value: null
+      background_color: '#3EB0D5'
+      font_color: null
+      color_application:
+        collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+        palette_id: 85de97da-2ded-4dec-9dbd-e6a7d36d5825
+      bold: false
+      italic: false
+      strikethrough: false
+      fields:
+      - revenue_per_ad_shown
+    - type: along a scale...
+      value: null
+      background_color: '#3EB0D5'
+      font_color: null
+      color_application:
+        collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7
+        palette_id: 1e4d66b9-f066-4c33-b0b7-cc10b4810688
+        options:
+          steps: 5
+          constraints:
+            mid:
+              type: middle
+          reverse: true
+          mirror: false
+      bold: false
+      italic: false
+      strikethrough: false
+      fields:
+      - events.number_of_ads_shown
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     map_plot_mode: points
@@ -857,10 +1117,11 @@
     map_marker_proportional_scale_type: linear
     map_marker_color_mode: fixed
     show_legend: true
-    map_value_colors: ["#8BC34A"]
+    map_value_colors:
+    - '#8BC34A'
     quantize_map_value_colors: false
     reverse_map_value_colors: true
-    hidden_fields:
+    hidden_fields: null
     series_types: {}
     note_state: expanded
     note_display: hover
@@ -877,6 +1138,8 @@
     col: 10
     width: 14
     height: 7
+    modern2026: true
+    collection_id: looker_2026
   filters:
   - name: Date Range
     title: Date Range
@@ -938,3 +1201,5 @@
     explore: events
     listens_to_filters: []
     field: events.game_name
+  style: modern
+  preferred_viewer: dashboards-next
