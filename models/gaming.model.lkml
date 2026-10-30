@@ -6,7 +6,8 @@ include: "/lookml_dashboards/*.dashboard.lookml"   # include a LookML dashboard 
 
 # Model Configuration
 datagroup: events_raw {
-  sql_trigger: SELECT CURRENT_DATE() ;;
+  # Rebuild the gaming PDTs once a week (Mondays) instead of daily to cut BigQuery cost.
+  sql_trigger: SELECT DATE_TRUNC(CURRENT_DATE(), ISOWEEK) ;;
   max_cache_age: "24 hours"
 }
 
